@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppContext } from '../context/AppContext'
+import { useAppContext } from '../context/AppContext.tsx'
 
 const ShowList: React.FC = () => {
   const { shows, loading, setSelectedShow } = useAppContext();
