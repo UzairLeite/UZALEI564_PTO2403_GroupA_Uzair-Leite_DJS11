@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { fetchShows, fetchShowById } from '../utils/api';
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { fetchShows, fetchShowById } from '../utils/api'
 
 interface Show {
   id: string;

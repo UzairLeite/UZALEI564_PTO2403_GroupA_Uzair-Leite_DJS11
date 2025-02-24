@@ -1,5 +1,5 @@
-import React from 'react';
-import { GENRES } from '../Constants';
+import React from 'react'
+import { GENRES } from '../Constants'
 
 interface ShowCardProps {
   show: {

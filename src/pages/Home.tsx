@@ -1,6 +1,6 @@
-import React from 'react';
-import { useAppContext } from '../store/store';
-import ShowCard from '../components/ShowCard';
+import React from 'react'
+import { useAppContext } from '../store/store'
+import ShowCard from '../components/ShowCard'
 
 const Home: React.FC = () => {
   const { shows, loading, setSelectedShow } = useAppContext();

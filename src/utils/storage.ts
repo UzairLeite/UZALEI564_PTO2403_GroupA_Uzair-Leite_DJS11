@@ -1,4 +1,4 @@
-import localforage from 'localforage';
+import localforage from 'localforage'
 
 export const getFavorites = async (): Promise<string[]> => {
   return (await localforage.getItem<string[]>('favorites')) || [];

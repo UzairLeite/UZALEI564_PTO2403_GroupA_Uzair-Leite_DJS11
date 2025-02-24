@@ -1,6 +1,6 @@
-import React from 'react';
-import { useAppContext } from '../store/store';
-import AudioPlayer from '../components/AudioPlayer';
+import React from 'react'
+import { useAppContext } from '../store/store'
+import AudioPlayer from '../components/AudioPlayer'
 
 const ShowDetails: React.FC = () => {
   const { selectedShow } = useAppContext();
