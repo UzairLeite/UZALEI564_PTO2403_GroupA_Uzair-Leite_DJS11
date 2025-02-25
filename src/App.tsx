@@ -1,13 +1,30 @@
-import React from 'react'
-import { RouterProvider } from 'react-router-dom'
-import { AppProvider } from './store/store'
-import router from './routes'
+import React from 'react';
+import { Outlet } from 'react-router-dom'; // Use Outlet for nested routes
+import { useAppContext } from './store/store';
 
 const App: React.FC = () => {
+  const { shows, loading, selectedShow, setSelectedShow } = useAppContext();
+
+  if (loading) return <div>Loading...</div>;
+
   return (
-    <AppProvider>
-      <RouterProvider router={router} />
-    </AppProvider>
+    <div>
+      <h1>Podcast Shows</h1>
+      <ul>
+        {shows.map((show) => (
+          <li key={show.id} onClick={() => setSelectedShow(show)}>
+            {show.title}
+          </li>
+        ))}
+      </ul>
+      {selectedShow && (
+        <div>
+          <h2>{selectedShow.title}</h2>
+          <p>{selectedShow.description}</p>
+        </div>
+      )}
+      <Outlet /> {/* Render nested routes here */}
+    </div>
   );
 };
 
