@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../store/store'
 import { getFavorites, removeFavorite } from '../utils/storage'
-import { fetchShowById } from '../utils/api'
 import ShowCard from '../components/ShowCard'
 import AudioPlayer from '../components/AudioPlayer'
 
@@ -25,10 +24,9 @@ const Favorites: React.FC = () => {
       const favoriteEpisodes: FavoriteEpisode[] = [];
 
       for (const episodeId of favoriteIds) {
-        // Fetch show and episode details (this is a placeholder; adjust based on your data structure)
         const show = shows.find((s) => s.episodes?.some((e) => e.id === episodeId));
         if (show) {
-          const episode = show.episodes.find((e) => e.id === episodeId);
+          const episode = show.episodes?.find((e) => e.id === episodeId);
           if (episode) {
             favoriteEpisodes.push({
               id: episodeId,
@@ -65,8 +63,18 @@ const Favorites: React.FC = () => {
         <div>
           {favorites.map((fav) => (
             <div key={fav.id}>
-              <h2>{fav.title}</h2>
-              <p>Show: {fav.showTitle}</p>
+              <ShowCard
+                show={{
+                  id: fav.showId,
+                  title: fav.showTitle,
+                  image: '', // Add an image URL if available
+                  genres: [], // Add genres if available
+                  seasons: parseInt(fav.seasonId, 10), // Convert seasonId to number
+                  updated: new Date().toISOString(), // Add a placeholder updated date
+                }}
+                onClick={() => {}} // Add an onClick handler if needed
+              />
+              <p>Episode: {fav.title}</p>
               <p>Season: {fav.seasonTitle}</p>
               <AudioPlayer src="placeholder-audio.mp3" />
               <button onClick={() => handleRemoveFavorite(fav.id)}>Remove from Favorites</button>
