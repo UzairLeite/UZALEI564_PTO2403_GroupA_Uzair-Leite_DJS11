@@ -1,24 +1,7 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { fetchShows, fetchShowById } from '../utils/api';
+import React, { createContext, useContext, ReactNode, useState, useEffect } from 'react';
+import { fetchShows } from '../utils/api';
 
 // Define the Show interface
-
-interface Episode {
-  id: string;
-  title: string;
-  seasonId: string;
-}
-
-interface Show {
-  id: string;
-  title: string;
-  description: string;
-  seasons: number;
-  image: string;
-  genres: number[];
-  updated: string;
-  episodes?: Episode[]; // Add episodes as an optional property
-}
 interface Show {
   id: string;
   title: string;
@@ -37,11 +20,15 @@ interface AppState {
   setSelectedShow: (show: Show | null) => void;
 }
 
-// Create the context with a default value of undefined
+// Create the context
 const AppContext = createContext<AppState | undefined>(undefined);
 
 // Define the AppProvider component
-export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+interface AppProviderProps {
+  children: ReactNode; // Define children as a prop
+}
+
+export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [shows, setShows] = useState<Show[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedShow, setSelectedShow] = useState<Show | null>(null);
@@ -50,7 +37,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   useEffect(() => {
     const loadShows = async () => {
       try {
-        const data = await fetchShows();
+        const data: Show[] = await fetchShows();
         setShows(data);
       } catch (error) {
         console.error('Failed to fetch shows:', error);
@@ -64,7 +51,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   // Provide the context value
   return (
     <AppContext.Provider value={{ shows, loading, selectedShow, setSelectedShow }}>
-      {children}
+      {children} {/* Use children here */}
     </AppContext.Provider>
   );
 };

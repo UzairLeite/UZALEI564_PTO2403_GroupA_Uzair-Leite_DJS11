@@ -1,5 +1,4 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom'; // Use Outlet for nested routes
 import { useAppContext } from './store/store';
 
 const App: React.FC = () => {
@@ -23,7 +22,6 @@ const App: React.FC = () => {
           <p>{selectedShow.description}</p>
         </div>
       )}
-      <Outlet /> {/* Render nested routes here */}
     </div>
   );
 };
